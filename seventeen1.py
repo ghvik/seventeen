@@ -12,8 +12,9 @@ def prompt_user(num_marbles=17):
     """Starts the game by prompting the first user for a move"""
     print("Let's play the game of Seventeen!")
 
-# Start the game loop
+# Start the game loop, prompt the human to enter a move
 def game_loop(num_marbles=17, winner_msg=""):
+    print("\nLet's play the game of Seventeen!")
     while num_marbles > 0:
         # player's move
         player_removed = players_move(num_marbles)
@@ -116,9 +117,7 @@ def get_marbles_remaining(previous_count, marbles_removed):
     return remaining
 
 def main():
-    prompt_user()
     game_loop()
-    #print_marbles_remaining()
 
 if __name__ == "__main__":
     main()
