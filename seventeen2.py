@@ -27,18 +27,29 @@ def display_games(game_list, num_marbles=17):
         does in 10 different games
     num_marbles -- the number of marbles at the start of the game
     """
+    p1_win_count = 0
+    p2_win_count = 0
     for game, turns in enumerate(game_list, 1):
         turns = turns.strip()
         turn_list = turns.split(',')
-        play_sequence, winner = get_sequence_and_winner(num_marbles, turn_list)
-        print("Game #{}. Play sequence: {}. Winner: {}"
+        game_results = get_game_play(num_marbles, turn_list)
+        play_sequence, winner = game_results
+        if winner == "1":
+            p1_win_count += 1
+        else:
+            p2_win_count += 1
+        print("Game #{}. Play sequence: {}. Winner: P{}"
             .format(game, play_sequence, winner))
+    print("Player 1 won {} times; Player 2 won {} times."
+        .format(p1_win_count, p2_win_count))
 
 # Controller
-def get_sequence_and_winner(remaining, player1_turns):
+def get_game_play(remaining, player1_turns):
     """This is the game loop for each game in the file. It assumes
     that there are enough player1 moves in the file for the game to always
     finish
+    
+    Returns a tuple of the play sequence and the winner
     
     Parameters:
     remaining -- the number of marbles remaining in the jar at the start
@@ -53,17 +64,19 @@ def get_sequence_and_winner(remaining, player1_turns):
         remaining = get_marbles_remaining(remaining, p1_turn)
         if remaining == 0:
             sequence += "{}".format(p1_turn)
-            winner = "P2"
+            winner = "2"
             break
         else:
             sequence += "{}-".format(p1_turn)
+        
+        # Computer's move
         computer_removed = computers_move(p1_turn)
         if remaining < computer_removed:
             computer_removed = remaining
         remaining = get_marbles_remaining(remaining, computer_removed)
         if remaining == 0:
             sequence += "{}".format(computer_removed)
-            winner = "P1"
+            winner = "1"
             break
         else:
             sequence += "{}-".format(computer_removed)
