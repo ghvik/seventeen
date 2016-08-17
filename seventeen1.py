@@ -26,7 +26,7 @@ def game_loop(num_marbles=17, winner_msg=""):
         computer_removed = computers_move(num_marbles, player_removed)
         print("Computer removed {} marbles.".format(computer_removed))
         
-        # calculate and print number of marbles remaining
+        # Calculate and print number of marbles remaining
         num_marbles = get_marbles_remaining(num_marbles, computer_removed)
         
         # Check if the human won, i.e. computer removes the last marble
