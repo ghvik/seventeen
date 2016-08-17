@@ -6,12 +6,6 @@
 # seventeen1.py
 ########################################################################
 
-# Prompt the human to enter a move
-# Move this function into game loop below
-def prompt_user(num_marbles=17):
-    """Starts the game by prompting the first user for a move"""
-    print("Let's play the game of Seventeen!")
-
 # Start the game loop, prompt the human to enter a move
 def game_loop(num_marbles=17, winner_msg=""):
     print("\nLet's play the game of Seventeen!")
